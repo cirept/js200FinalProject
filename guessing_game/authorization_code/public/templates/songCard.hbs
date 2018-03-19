@@ -1,0 +1,32 @@
+<!-- <div class="songContainer"> -->
+
+  <!-- <audio id="songSample" controls="controls" class="hide">
+    </audio> -->
+  <!-- <button type="button" name="Play" id="playSample">Play</button> -->
+
+  <h2>Song {{song_number}}</h2>
+  <!-- Song Card IDEA -->
+  <!-- TODO templatize this -->
+  <!-- TODO use font awesome icons for imagery -->
+  <div class="song flip-container">
+    <!-- <h2>Song</h2> -->
+    <div class="flipper">
+      <div class="front">
+        <div><img src="{{album_art}}" alt="{{album_name}}"></div>
+        <audio class="songSample" controls>
+          <source src="{{preview_url}}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        <!-- <button type="button" name="Play" class="btn playSample one">Play</button> -->
+        <button type="button" name="Guess the Song" class="btn btn-primary guessSong one">Guess the Song</button></div>
+      <div class="back">
+        <p class="song one choice1"><span>{{artist}}</span><br><span>{{name}}</span></p>
+        <p class="song one choice2"><span>{{artist}}</span><br><span>{{name}}</span></p>
+        <p class="song one choice3"><span>{{artist}}</span><br><span>{{name}}</span></p>
+        <p class="song one choice4"><span>{{artist}}</span><br><span>{{name}}</span></p>
+      </div>
+    </div>
+  </div>
+  <!-- <p><span class="notes">notes</span> the user has time to listen to the sample of the song. Once the user is ready to guess, they press the "Guess Song" button and the panel flips over. probably need to style buttons ot make them nicer. the actual
+    player will be invisble and will respond to the button presses. The player will automatically reset after it has completed playing the snippet of the song.</p> -->
+<!-- </div> -->

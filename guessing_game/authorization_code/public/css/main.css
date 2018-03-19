@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');
+/* @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'); */
+
+/* ****************************************************** */
+
+/* general styles */
+
+/* ****************************************************** */
+
+body {
+  font: 12px 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-size: 35px;
+  line-height: 70px;
+}
+
+.btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  background: #191414;
+  cursor: pointer;
+  border-radius: 30px;
+  padding: 15px 30px;
+  margin: 10px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  border: none;
+}
+
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  outline: 0;
+}
+
+header {
+  /* border: 1px solid #191414; */
+  /* padding: 20px; */
+  /* border-radius: 100px; */
+  /* margin: 0 auto; */
+  /* background: #191414; */
+}
+
+main {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  align-content: center;
+}
+
+/* button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover {
+  /* background: none; */
+
+/* cursor: pointer; */
+
+/* border-radius: 30px; */
+
+/* padding: 15px 30px; */
+
+/* margin: 10px; */
+
+/* text-decoration: none; */
+
+/* color: rgb(255, 255, 255); */
+
+/* font-size: 12px; */
+
+/* border: none; */
+
+/* } */
+
+/* ****************************************************** */
+
+/* id selectors */
+
+/* ****************************************************** */
+
+#login {
+  margin: 20px 10px;
+  text-align: center;
+}
+
+#loggedin {
+  text-align: center;
+}
+
+#user-profile {
+  background: rgb(29, 185, 84);
+  padding: 10px;
+}
+
+#user-profile>.media {
+  display: inline-block;
+}
+
+/* #startGame {
+  display: block;
+} */
+
+div[id*="song"] {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+}
+
+#gameInterface {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 25px 0;
+  justify-content: center;
+}
+
+/* ****************************************************** */
+
+/* class selectors */
+
+/* ****************************************************** */
+
+.songContainer {
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  /* margin: 10px 0; */
+  /* margin: 0 auto; */
+}
+
+.hide {
+  display: none;
+}
+
+.song {
+  padding: 10px;
+  margin: 10px;
+  /* border: 1px solid #000000; */
+}
+
+/* .songSample {
+  display: none;
+} */
+
+.notes {
+  display: block;
+  clear: right;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.pull-left {
+  width: auto;
+  display: inline-block;
+}
+
+.media-body {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 40px;
+}
+
+/* .btn {
+  background: #191414;
+  color: rgb(255, 255, 255);
+} */
+
+.btn.btn-primary {
+  background: rgb(29, 185, 84);
+}
+
+/* .pinTop {
+  display: block;
+  /* align-self: flex-start; */
+
+/* position: absolute;
+top: 0;
+width: 100%;
+} */
+
+/* */
+
+/* ****************************************************** */
+
+/* element selectors, psuedo */
+
+/* ****************************************************** */
+
+p[class*="choice"]:hover {
+  background: purple;
+  cursor: pointer;
+}
+
+dt {
+  font-weight: bold;
+  /* display: inline-block; */
+}
+
+dd {
+  /* display: inline-block; */
+}
