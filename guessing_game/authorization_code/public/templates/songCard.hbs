@@ -1,4 +1,4 @@
-<!-- <div class="songContainer"> -->
+<div class="song{{song_number}}">
 
   <!-- <audio id="songSample" controls="controls" class="hide">
     </audio> -->
@@ -8,7 +8,7 @@
   <!-- Song Card IDEA -->
   <!-- TODO templatize this -->
   <!-- TODO use font awesome icons for imagery -->
-  <div class="song flip-container">
+  <div class="flip-container" data-song="{{name}}" data-artist="{{artist}}">
     <!-- <h2>Song</h2> -->
     <div class="flipper">
       <div class="front">
@@ -18,15 +18,25 @@
             Your browser does not support the audio element.
           </audio>
         <!-- <button type="button" name="Play" class="btn playSample one">Play</button> -->
-        <button type="button" name="Guess the Song" class="btn btn-primary guessSong one">Guess the Song</button></div>
+        <button type="button" name="Guess the Song" class="btn btn-primary guessSong">Guess the Song</button></div>
       <div class="back">
-        <p class="song one choice1"><span>{{artist}}</span><br><span>{{name}}</span></p>
-        <p class="song one choice2"><span>{{artist}}</span><br><span>{{name}}</span></p>
-        <p class="song one choice3"><span>{{artist}}</span><br><span>{{name}}</span></p>
-        <p class="song one choice4"><span>{{artist}}</span><br><span>{{name}}</span></p>
+        <ul class="choice_list">
+          <li class="choice1" data-song="{{name}}" data-artist="{{artist}}">
+            <span>{{artist}}</span>&nbsp; - &nbsp;<span>{{name}}</span>
+          </li>
+          <li class="choice2" data-song="{{name}}" data-artist="{{artist}}">
+            <span>{{artist}}</span>&nbsp; - &nbsp;<span>{{name}}</span>
+          </li>
+          <li class="choice3" data-song="{{name}}" data-artist="{{artist}}">
+            <span>{{artist}}</span>&nbsp; - &nbsp;<span>{{name}}</span>
+          </li>
+          <li class="choice4" data-song="{{name}}" data-artist="{{artist}}">
+            <span>{{artist}}</span>&nbsp; - &nbsp;<span>{{name}}</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
   <!-- <p><span class="notes">notes</span> the user has time to listen to the sample of the song. Once the user is ready to guess, they press the "Guess Song" button and the panel flips over. probably need to style buttons ot make them nicer. the actual
     player will be invisble and will respond to the button presses. The player will automatically reset after it has completed playing the snippet of the song.</p> -->
-<!-- </div> -->
+</div>
