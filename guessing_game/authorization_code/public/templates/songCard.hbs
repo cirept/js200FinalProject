@@ -1,0 +1,25 @@
+<div class="song{{song_number}}" data-song="{{name}}" data-artist="{{artist}}">
+  <h2>Song {{song_number}}</h2>
+  <div class="flip-container">
+    <div class="flipper">
+      <div class="front">
+        <div><img src="{{album_art_medium}}" alt="{{album_name}}"></div>
+        <audio class="songSample" controls>
+          <source src="{{preview_url}}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        <button type="button" name="Guess the Song" class="btn btn-primary guessSong">Guess the Song</button></div>
+      <div class="back">
+        <ul class="choice_list">
+          <!-- loop through choice array object attribute -->
+          {{#each choices}}
+          <li class="choice1" data-song="{{this}}" data-artist="{{../artist}}">
+            <!-- fill in choice array here -->
+            {{../artist}} &nbsp; - &nbsp; {{this}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
