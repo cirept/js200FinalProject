@@ -2,8 +2,8 @@
 
 .flip-container {
   perspective: 1000px;
-  /* width: 320px; */
-  height: 165px;
+  /* height: 165px; */
+  height: 400px;
   text-align: center;
 }
 
@@ -13,25 +13,17 @@
   transform: rotateY(180deg);
 }
 
-/* .flip-container.hover .flipper .front {
-  display: none;
-} */
+/* font and back card styles */
 
 .front,
 .back {
   width: 99.7%;
-  /* height: 245px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: stretch;
   align-content: stretch;
 }
-
-/* .back {
-  flex-direction: column;
-  justify-content: center;
-} */
 
 /* flip speed goes here */
 
@@ -49,14 +41,12 @@
   backface-visibility: hidden;
   text-align: center;
   position: absolute;
-  /* top: 0; */
   left: 0;
 }
 
 /* front pane, placed above back */
 
 .front {
-  /* top: 50px; */
   z-index: 2;
   /* for firefox 31 */
   transform: rotateY(0deg);

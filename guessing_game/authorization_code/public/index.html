@@ -9,22 +9,40 @@
     <script src="/js/master.js" charset="utf-8"></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/flip.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" charset="utf-8"></script>
   </head>
 
   <body>
     <header>
       <div id="login" class="hide">
-        <h1>Please login to Spotify to play this game.</h1>
-        <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <div class="loginScreen">
+          <h1>Please login to Spotify to play this game.</h1>
+          <a id="loginLink" href="/login" class="btn btn-primary">Log in with Spotify</a>
+        </div>
+        <div class="fa-4x loading hide">
+          <p>Please wait while we log you in.</p>
+          <i class="fas fa-cog fa-spin"></i>
+        </div>
       </div>
       <div id="loggedin" class="hide">
         <div id="user-profile">
         </div>
-        <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
       </div>
     </header>
     <main>
+      <div id="loading" class="fa-5x hide">
+        <p>Hold please while the game loads.</p>
+        <i class="fas fa-cog fa-spin"></i>
+      </div>
+      <div id="gameSettings" class="hide">
+        <label for="questionAmount">How Many Questions Would You Like?</label>
+        <select name="questionAmount"></select>
+        <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
+      </div>
       <div id="gameInterface" class="hide">
+        <div id="scoreboard" class="hide">Questions Correct : <span id="score">0</span></div>
       </div>
     </main>
   </body>

@@ -1,5 +1,12 @@
 /**
  * Starts the functionality of the game
+1. Show the game interface div and hides the "Start Game" button
+2. Use Spotify API : Grab the total size custom created Spotify Playlist
+3. Use Spotify API : Saves the song information of 10 random songs
+4. Create an Object with just the information that the game will use.
+5. Loop through the song list Object to grab 3 other songs from the artist
+
+
  * @param {object} event - the click event object passed from the event listener
  */
 const startGame = (event) => {
@@ -7,18 +14,24 @@ const startGame = (event) => {
   jQuery('#gameInterface')
     .show();
   // hide the buttons
-  jQuery(event.target)
+  jQuery('#gameSettings')
     .hide();
+  // show game loading screen
+  jQuery('#loading')
+    .removeClass('hide');
 
   // the URL for the game playlist
   let totalURL = 'https://api.spotify.com/v1/users/cirept612/playlists/5J9c1FAlO3qEnLMLSqZjwu/tracks?market=ES&fields=total&limit=1&offset=1';
   let trackCount;
   // set the number of songs that make up the game questions
-  let numberOfSongs = 10;
+  let numberOfSongs = Number(jQuery('#gameSettings select[name="questionAmount"]')
+    .val());
   let songList = {}; // empty object to store song information
 
   if (!trackCount) {
+    // ----------------------------------
     // get the total number of tracks in the custom playlist
+    // ----------------------------------
     jQuery.ajax({
         'url': totalURL,
         'async': true,
@@ -29,7 +42,9 @@ const startGame = (event) => {
         },
       })
       .fail((xhr, status, e) => {
+        // ----------------------------------
         // show error message and have the user re-log
+        // ----------------------------------
         jQuery('body .container')
           .prepend('<span>Connection Timed Out : Please log back into Spotify</span>');
         jQuery('#loggedin')
@@ -78,7 +93,9 @@ const startGame = (event) => {
                 id: track.id,
                 artist: track.artists[0].name,
                 artist_id: track.artists[0].id,
-                album_art: track.album.images[2].url,
+                album_art_large: track.album.images[0].url,
+                album_art_medium: track.album.images[1].url,
+                album_art_small: track.album.images[2].url,
                 album_name: track.album.name,
               };
 
@@ -156,28 +173,17 @@ const startGame = (event) => {
             url: 'templates/songCard.hbs',
             async: false,
             success: (data) => {
+              // ----------------------------------
               // dynamically call the template file and use
               // Handlebars to build the html and add it
               // to the page.
+              // ----------------------------------
               let songCardTemplate = Handlebars.compile(data);
               let userProfilePlaceholder = document.getElementById('gameInterface');
+              // ----------------------------------
+              // Inject the compiled code onto the webpage
+              // ----------------------------------
               userProfilePlaceholder.innerHTML += songCardTemplate(value);
-
-              // bind event listener for play button
-              // -----------------------------------
-              // jQuery('#song-' + no + '.audio.songSample').on('click', function() {
-              //   let songPlayer = document.querySelector('#song-' + no + '.audio.songSample');
-              //
-              //   // songPlayer = songPlayer.querySelector('audio.songSample');
-              //   console.log(songPlayer);
-              //   songPlayer.volume = 0.5;
-              //   songPlayer.autoplay = true;
-              //
-              //   setTimeout(function() {
-              //     songPlayer.pause();
-              //     songPlayer.currentTime = 0;
-              //   }, 2000);
-              // });
             },
           });
         });
@@ -185,27 +191,59 @@ const startGame = (event) => {
       .always((data, status, e) => {
         // after the cards have been built and added to the DOM
         // bind the event listeners for the choices
-
-        // bind all choices
+        // ----------------------------------
+        // Bind event listeners to the Song Card Elements
+        // ----------------------------------
         for (let x = 1; x <= numberOfSongs; x += 1) {
-          // FRONT
+          // ----------------------------------
+          // FRONT of Card
+          // ----------------------------------
           // bind the functionality to the GUESS SONG button
           jQuery('.song' + x + ' button.guessSong')
             .on('click', () => {
-              // console.log(this);
               jQuery('.song' + x + ' .flip-container')
-                // .parents('.flip-container')
                 .addClass('hover');
             });
-          // BACK
+          // ----------------------------------
+          // BACK of Card
+          // ----------------------------------
           // bind song choices
           for (let y = 1; y < 5; y += 1) {
             jQuery('.song' + x + ' .choice' + y)
-              .on('click', () => {
-                console.log('bind click');
+              .on('click', (event) => {
+                // ----------------------------------
+                // Bind OPTION click functionality
+                // ----------------------------------
+                let elem = event.target;
+                let $elem = jQuery(event.target);
+                let data = event.target.dataset;
+                let $parent = jQuery(elem)
+                  .parents('div[class*="song"]');
+                // ----------------------------------
+                // Bind the Options Elements
+                // ----------------------------------
+                if ($elem.data('song') === $parent.data('song')) {
+                  $parent.css({
+                    background: 'green',
+                  });
+                } else {
+                  $parent.css({
+                    background: 'red',
+                  });
+                }
               });
           }
         }
+        // ----------------------------------
+        // Show the ScoreBoard
+        // ----------------------------------
+        jQuery('#scoreboard')
+          .removeClass('hide');
+        // ----------------------------------
+        // hide loading screen
+        // ----------------------------------
+        jQuery('#loading')
+          .addClass('hide');
       });
   } else {
     console.log('track count already known');

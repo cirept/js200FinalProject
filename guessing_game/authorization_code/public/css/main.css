@@ -53,11 +53,16 @@ header {
   /* border-radius: 100px; */
   /* margin: 0 auto; */
   /* background: #191414; */
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 main {
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   align-content: center;
 }
@@ -92,14 +97,21 @@ input[type="button"]:hover {
 
 /* ****************************************************** */
 
-#login {
-  margin: 20px 10px;
-  text-align: center;
+#login,
+#loggedin {
+  display: none;
 }
 
-#loggedin {
-  text-align: center;
+#login {
+  margin: 20px 10px;
+  /* text-align: center; */
+  position: absolute;
+  top: 35%;
 }
+
+/* #loggedin {
+  text-align: center;
+} */
 
 #user-profile {
   background: rgb(29, 185, 84);
@@ -108,6 +120,17 @@ input[type="button"]:hover {
 
 #user-profile>.media {
   display: inline-block;
+}
+
+#gameSettings {
+  /* display: none; */
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+#gameSettings.flex {
+  display: flex;
 }
 
 /* #startGame {
@@ -127,6 +150,18 @@ div[id*="song"] {
   justify-content: center;
 }
 
+#scoreboard {
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+}
+
+#loading {
+  position: absolute;
+  top: 40%;
+  text-align: center;
+}
+
 /* ****************************************************** */
 
 /* class selectors */
@@ -135,6 +170,13 @@ div[id*="song"] {
 
 .hide {
   display: none;
+}
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 500px;
 }
 
 /* .song {
@@ -213,8 +255,9 @@ div[class*="song"] {
 
 li[class*="choice"] {
   padding: 10px;
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  /* justify-content: center; */
+  text-align: justify;
 }
 
 li[class*="choice"]:hover {
