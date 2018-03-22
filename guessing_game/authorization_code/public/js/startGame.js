@@ -1,12 +1,15 @@
 /**
- * Starts the functionality of the game
+Starts the functionality of the game
 1. Show the game interface div and hides the "Start Game" button
 2. Use Spotify API : Grab the total size custom created Spotify Playlist
 3. Use Spotify API : Saves the song information of 10 random songs
 4. Create an Object with just the information that the game will use.
 5. Loop through the song list Object to grab 3 other songs from the artist
+6. Using the card template, create html and add it to the page.
+*/
 
-
+/**
+ * Starts the game functionality
  * @param {object} event - the click event object passed from the event listener
  */
 const startGame = (event) => {
@@ -21,26 +24,26 @@ const startGame = (event) => {
     .removeClass('hide');
 
   // the URL for the game playlist
-  let totalURL = 'https://api.spotify.com/v1/users/cirept612/playlists/5J9c1FAlO3qEnLMLSqZjwu/tracks?market=ES&fields=total&limit=1&offset=1';
+  const totalURL = 'https://api.spotify.com/v1/users/cirept612/playlists/5J9c1FAlO3qEnLMLSqZjwu/tracks?market=ES&fields=total&limit=1&offset=1';
   let trackCount;
   // set the number of songs that make up the game questions
-  let numberOfSongs = Number(jQuery('#gameSettings select[name="questionAmount"]')
+  const numberOfSongs = Number(jQuery('#gameSettings select[name="questionAmount"]')
     .val());
-  let songList = {}; // empty object to store song information
+  const songList = {}; // empty object to store song information
 
   if (!trackCount) {
     // ----------------------------------
     // get the total number of tracks in the custom playlist
     // ----------------------------------
     jQuery.ajax({
-        'url': totalURL,
-        'async': true,
-        'contentType': 'application/json',
-        'dataType': 'json',
-        'headers': {
-          'Authorization': 'Bearer ' + event.data.access_token,
-        },
-      })
+      url: totalURL,
+      async: true,
+      contentType: 'application/json',
+      dataType: 'json',
+      headers: {
+        Authorization: `Bearer ${event.data.access_token}`,
+      },
+    })
       .fail((xhr, status, e) => {
         // ----------------------------------
         // show error message and have the user re-log
@@ -57,32 +60,35 @@ const startGame = (event) => {
          * if the GET request was successful, save that information
          * and call grab 10 random songs from the playlist
          */
-
         // get the total number of songs in the spotify playlist
         trackCount = data.total;
         // randomly select X amount of songs from the Spotify playlist
-        let songs = generateSongList(trackCount, numberOfSongs);
+        const songs = generateSongList(trackCount, numberOfSongs);
         // loop counter for the songs
         let no = 1;
         // get the track numbers from the playlist
         // USED MAP BECAUSE I DID NOT WANT TO CREATE A LOOP.  =]
-        let quizQuestions = songs.map((x) => {
+        const quizQuestions = songs.map((x) => {
           // using map to run this function on all items in the array
-          let trackURL = 'https://api.spotify.com/v1/users/cirept612/playlists/5J9c1FAlO3qEnLMLSqZjwu/tracks?market=ES&limit=1&offset=' + x;
+          const trackURL = `https://api.spotify.com/v1/users/cirept612/playlists/5J9c1FAlO3qEnLMLSqZjwu/tracks?market=ES&limit=1&offset=${x}`;
           jQuery.ajax({
-              'url': trackURL,
-              'async': false,
-              'contentType': 'application/json',
-              'dataType': 'json',
-              'headers': {
-                'Authorization': 'Bearer ' + event.data.access_token,
-              },
-            })
-            .done(function(data, status, xhr) {
-              let response = data;
+            url: trackURL,
+            async: false,
+            contentType: 'application/json',
+            dataType: 'json',
+            headers: {
+              Authorization: `Bearer ${event.data.access_token}`,
+            },
+          })
+            .done((response, status, xhr) => {
+              // ----------------------------------
+              // for demo purposes
+              // ----------------------------------
+              console.log(response);
+
               // filter the data that was received from Spotify to
               // only what is needed by the templates
-              let track = response.items[0].track;
+              const track = response.items[0].track;
               // ----------------------------------
               // save song information into an object
               // ----------------------------------
@@ -101,27 +107,27 @@ const startGame = (event) => {
 
               // TODO get artists top tracks and use them as choices
               // using map to run this function on all items in the array
-              let artistTopTrackURL = 'https://api.spotify.com/v1/artists/' + track.artists[0].id + '/top-tracks?country=ES';
+              const artistTopTrackURL = `https://api.spotify.com/v1/artists/${track.artists[0].id}/top-tracks?country=ES`;
               // ----------------------------------
               // Get Artist Top Tracks From spotify
               // ----------------------------------
               jQuery.ajax({
-                  'url': artistTopTrackURL,
-                  'async': false,
-                  'contentType': 'application/json',
-                  'dataType': 'json',
-                  'headers': {
-                    'Authorization': 'Bearer ' + event.data.access_token,
-                  },
-                })
-                .done(function(data, status, xhr) {
+                url: artistTopTrackURL,
+                async: false,
+                contentType: 'application/json',
+                dataType: 'json',
+                headers: {
+                  Authorization: `Bearer ${event.data.access_token}`,
+                },
+              })
+                .done((data, status, xhr) => {
                   // ----------------------------------
                   // Filter the Top Tracks data Returned from Spotify
                   // Remove Song Guess Question from Artist Top Tracks, if found
                   // ----------------------------------
                   // save tracks to a variable
-                  let song_id = track.id; // save the song id
-                  let topTracks = data.tracks; // save returned data from Spotify to a variable
+                  const song_id = track.id; // save the song id
+                  const topTracks = data.tracks; // save returned data from Spotify to a variable
                   for (let p = 0; p < topTracks.length; p += 1) {
                     if (topTracks[p].id === song_id) {
                       topTracks.splice(p, 1);
@@ -130,10 +136,10 @@ const startGame = (event) => {
                   // ----------------------------------
                   // Generate a list of random numbers ranging from 0 to Array.Length
                   // ----------------------------------
-                  let number_of_choices = 3; // define the length of the array
-                  let myLength = topTracks.length; // determine the length of the top track array
+                  const number_of_choices = 3; // define the length of the array
+                  const myLength = topTracks.length; // determine the length of the top track array
                   // get an array of 3 randomly generated numbers
-                  let choiceList = generateSongList(myLength, number_of_choices);
+                  const choiceList = generateSongList(myLength, number_of_choices);
                   // ----------------------------------
                   // Get the index representation of the randomly generated number list
                   // ----------------------------------
@@ -149,9 +155,7 @@ const startGame = (event) => {
                   // ----------------------------------
                   // Randomly Sort the choices
                   // ----------------------------------
-                  choiceList.sort(function(a, b) {
-                    return 0.5 - Math.random();
-                  });
+                  choiceList.sort((a, b) => 0.5 - Math.random());
                   // ----------------------------------
                   // Save generated choice list to the Songs Object
                   // ----------------------------------
@@ -178,12 +182,31 @@ const startGame = (event) => {
               // Handlebars to build the html and add it
               // to the page.
               // ----------------------------------
-              let songCardTemplate = Handlebars.compile(data);
-              let userProfilePlaceholder = document.getElementById('gameInterface');
+              const songCardTemplate = Handlebars.compile(data);
+              const userProfilePlaceholder = document.getElementById('gameInterface');
               // ----------------------------------
               // Inject the compiled code onto the webpage
               // ----------------------------------
               userProfilePlaceholder.innerHTML += songCardTemplate(value);
+
+              // ----------------------------------
+              // animate the song cards reveal
+              // ----------------------------------
+              jQuery('#gameInterface')
+                .hide()
+                .show()
+                .fadeIn(1000)
+                .delay(1500)
+                .queue(function () {
+                  jQuery('div[class*="song"]')
+                    .each(function (index, elem) {
+                      jQuery(elem)
+                        .delay(200 * index)
+                        .animate({
+                          'opacity': 1,
+                        }, 1000);
+                    });
+                });
             },
           });
         });
@@ -199,9 +222,9 @@ const startGame = (event) => {
           // FRONT of Card
           // ----------------------------------
           // bind the functionality to the GUESS SONG button
-          jQuery('.song' + x + ' button.guessSong')
+          jQuery(`.song${x} button.guessSong`)
             .on('click', () => {
-              jQuery('.song' + x + ' .flip-container')
+              jQuery(`.song${x} .flip-container`)
                 .addClass('hover');
             });
           // ----------------------------------
@@ -209,28 +232,72 @@ const startGame = (event) => {
           // ----------------------------------
           // bind song choices
           for (let y = 1; y < 5; y += 1) {
-            jQuery('.song' + x + ' .choice' + y)
-              .on('click', (event) => {
+            jQuery(`.song${x} .choice${y}`)
+              .on('click', (ev) => {
                 // ----------------------------------
                 // Bind OPTION click functionality
                 // ----------------------------------
-                let elem = event.target;
-                let $elem = jQuery(event.target);
-                let data = event.target.dataset;
-                let $parent = jQuery(elem)
+                const elem = ev.target;
+                const $elem = jQuery(ev.target);
+                // const data = event.target.dataset;
+                const $parent = jQuery(elem)
                   .parents('div[class*="song"]');
                 // ----------------------------------
                 // Bind the Options Elements
                 // ----------------------------------
                 if ($elem.data('song') === $parent.data('song')) {
+                  // change whole card green
                   $parent.css({
-                    background: 'green',
+                    'background-color': 'rgba(255, 255, 255, .25)',
+                    '-webkit - transition': 'background-color 1000ms linear',
+                    '-ms-transition': 'background-color 1000ms linear',
+                    'transition': 'background-color 1000ms linear',
                   });
+
+                  // convert current score to a number
+                  let curScore = Number(jQuery('#score')
+                    .html());
+                  // add the current score plus 1
+                  jQuery('#score')
+                    .html(curScore + 1);
                 } else {
                   $parent.css({
-                    background: 'red',
+                    'background-color': 'red',
+                    '-webkit - transition': 'background-color 1000ms linear',
+                    '-ms-transition': 'background-color 1000ms linear',
+                    'transition': 'background-color 1000ms linear',
                   });
                 }
+
+                // ----------------------------------
+                // post answer animations
+                // ----------------------------------
+                $elem.delay(1000)
+                  .queue(function () {
+                    // fade out choice list
+                    $elem.parents('.back')
+                      .fadeOut('fast')
+                      .queue(function () {
+                        // toggle the choice list container
+                        $elem.parents('.flip-container')
+                          .animate({
+                            'height': 'toggle',
+                          }, 1000);
+                        // hide the h2 while the animations happen
+                        $parent.children('h2')
+                          .toggle();
+                        // shrink the entire card
+                        $parent.animate({
+                          'height': '40px',
+                        })
+                          .delay(350)
+                          .queue(function () {
+                            // show the h2
+                            $parent.children('h2')
+                              .toggle();
+                          });
+                      });
+                  });
               });
           }
         }
@@ -238,7 +305,7 @@ const startGame = (event) => {
         // Show the ScoreBoard
         // ----------------------------------
         jQuery('#scoreboard')
-          .removeClass('hide');
+          .fadeIn(1000);
         // ----------------------------------
         // hide loading screen
         // ----------------------------------

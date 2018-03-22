@@ -1,4 +1,38 @@
 /**
+ * Extends jquery functionality for easy implementation
+ * of animate css classes
+ */
+$.fn.extend({
+  animateCss: function (animationName, callback) {
+    var animationEnd = (function (el) {
+      var animations = {
+        animation: 'animationend',
+        OAnimation: 'oAnimationEnd',
+        MozAnimation: 'mozAnimationEnd',
+        WebkitAnimation: 'webkitAnimationEnd',
+      };
+
+      for (var t in animations) {
+        if (el.style[t] !== undefined) {
+          return animations[t];
+        }
+      }
+    })(document.createElement('div'));
+
+    this.addClass('animated ' + animationName)
+      .one(animationEnd, function () {
+        $(this)
+          .removeClass('animated ' + animationName);
+
+        if (typeof callback === 'function') callback();
+      });
+
+    return this;
+  },
+});
+
+
+/**
  * Obtains parameters from the hash of the URL
  * @return {Object} has parems
  */
@@ -59,12 +93,12 @@ const getUserProfile = (accessToken) => {
    *  Load the users profile
    */
   $.ajax({
-      url: 'https://api.spotify.com/v1/me',
-      headers: {
-        'Authorization': 'Bearer ' + accessToken,
-      },
-    })
-    .fail(function(xhr, textStatus, e) {
+    url: 'https://api.spotify.com/v1/me',
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+    },
+  })
+    .fail(function (xhr, textStatus, e) {
       // this will run if the token has expired after the user tries to reload the game
       if (xhr.status == 401 && e === 'Unauthorized') {
         jQuery('body .container')
@@ -76,27 +110,39 @@ const getUserProfile = (accessToken) => {
     .done((response, textStatus, xhr) => {
       // dynamically call the template file to load the html onto the page
       jQuery.ajax({
-          url: 'templates/user-profile-template.hbs',
-        })
+        url: 'templates/user-profile-template.hbs',
+      })
         .done((data, textStatus, xhr) => {
           // handlebar process and load html onto the webpage
           let userProfileTemplate = Handlebars.compile(data);
           let userProfilePlaceholder = document.getElementById('user-profile');
           userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+
+          jQuery('body')
+            .css({
+              'background-color': 'rgb(29, 185, 84)',
+              '-webkit - transition': 'background-color 1000ms linear',
+              '-ms-transition': 'background-color 1000ms linear',
+              'transition': 'background-color 1000ms linear',
+            });
+          // ----------------------------------
           // toggle visibility to page sections
+          // ----------------------------------
           jQuery('#login')
             .hide();
           jQuery('#gameInterface')
             .hide();
           jQuery('#loggedin')
-            .show();
+            .fadeIn(1000);
 
           // ----------------------------------
           // show loading screen
           // ----------------------------------
           jQuery('#gameSettings')
             .removeClass('hide')
-            .addClass('flex');
+            .css('display', 'flex')
+            .hide()
+            .fadeIn(1000);
 
           // ----------------------------------
           // build the options for the questions amount drop down
@@ -111,11 +157,40 @@ const getUserProfile = (accessToken) => {
 
 
 /**
+ *  Makes the scoreboard sticky when the board scrolls to the top of the page
+ */
+const stickyScoreBoard = () => {
+  $(window)
+    .scroll(function (e) {
+      let $el = $('#scoreboard');
+      let isPositionFixed = $el.css('position') == 'fixed';
+      if ($(this)
+        .scrollTop() > 300 && !isPositionFixed) {
+        $el.css({
+          'position': 'fixed',
+          'top': '0px',
+          'z-index': 1,
+          'height': '50px',
+          'line-height': '50px',
+        });
+      }
+      if ($(this)
+        .scrollTop() < 300 && isPositionFixed) {
+        $el.css({
+          'position': 'static',
+          'top': '0px',
+          'height': '',
+          'line-height': '',
+        });
+      }
+    });
+};
+/**
  * Triggers the loading animation when the user chooses to log into Spotify
  */
 const bindLoginEvent = () => {
   jQuery('#loginLink')
-    .on('click', function() {
+    .on('click', function () {
       jQuery('#login .loginScreen')
         .hide();
       jQuery('#login .loading')
@@ -131,7 +206,7 @@ const loadGame = () => {
   let params = getHashParams();
 
   let accessToken = params.access_token;
-  let refreshToken = params.refresh_token;
+  // let refreshToken = params.refresh_token;
   let error = params.error;
 
   if (error) {
@@ -165,6 +240,7 @@ const loadGame = () => {
  */
 const startApp = () => {
   bindLoginEvent();
+  stickyScoreBoard();
   loadGame();
 };
 

@@ -56,7 +56,7 @@
 /* back, initially hidden pane */
 
 .back {
-  top: 0;
+  top: 70px;
   transform: rotateY(180deg);
   background: pink;
   flex-direction: column;
