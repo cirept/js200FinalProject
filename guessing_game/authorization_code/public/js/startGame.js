@@ -227,7 +227,7 @@ const startGame = (event) => {
                     background: 'green',
                         filter: 'inherit'
                   });
-                    $child.css({
+                    $parent.find('img').css({
                         filter: 'inherit'
                     })
                 } else {
