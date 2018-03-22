@@ -36,9 +36,9 @@ input[type="reset"],
 input[type="button"] {
   background: #191414;
   cursor: pointer;
-  border-radius: 30px;
-  padding: 15px 30px;
-  margin: 10px;
+  border-radius: 50px;
+  padding: 10px 30px;
+  margin: 10px 0;
   text-decoration: none;
   color: rgb(255, 255, 255);
   font-size: 12px;
@@ -50,6 +50,10 @@ input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
   outline: 0;
+}
+
+.guessSong {
+    border-radius: 10px;
 }
 
 header {
@@ -143,6 +147,21 @@ input[type="button"]:hover {
   display: block;
 } */
 
+
+.howManyQ {
+    font-size: 30px;
+    text-align: center;
+}
+
+.howManyA {
+    font-size: 30px;
+    padding: 10px;
+    margin: 40px;
+}
+
+
+
+
 div[id*="song"] {
   display: flex;
   flex-direction: column;
@@ -235,6 +254,10 @@ div[id*="song"] {
 
 .btn.btn-primary {
   background: rgb(29, 185, 84);
+    width: 100%;
+    height: 100%;
+    font-size: 26px;
+    line-height: 2;
 }
 
 .choice_list {
@@ -268,24 +291,26 @@ div[class*="song"] {
   align-items: center;
   align-content: center;
   margin: 10px;
-  padding: 10px 10px 30px 10px;
+  padding: 10px 10px 110px 10px;
 /*  border: 1px solid black;*/
   /* margin: 10px 0; */
   /* margin: 0 auto; */
-    background: #ffffff;
-    color: #333333;
+    background: #555555;
+    transition: 0.5s;
 }
 
 li[class*="choice"] {
   padding: 10px;
   /* display: flex; */
   /* justify-content: center; */
-  text-align: justify;
+  text-align: center;
+    font-size: 14px;
 }
 
 li[class*="choice"]:hover {
   background: purple;
   cursor: pointer;
+    transition:.5s;
 }
 
 dt {
@@ -305,6 +330,7 @@ dd {
 
 /*********************/
 .albumart {
+    transition: 0.5s;
     filter: blur(5px);
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);

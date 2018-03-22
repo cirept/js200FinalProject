@@ -8,14 +8,17 @@
           <source src="{{preview_url}}" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>
-        <button type="button" name="Guess the Song" class="btn btn-primary guessSong"><i class="fas fa-play"></i> Guess the Song</button></div>
+        <button type="button" name="Guess the Song" class="btn btn-primary guessSong">
+            <i class="fas fa-question" style="font-size: 90px;"></i>
+            <br>
+            Guess the Song</button></div>
       <div class="back">
         <ul class="choice_list">
           <!-- loop through choice array object attribute -->
           {{#each choices}}
           <li class="choice1" data-song="{{this}}" data-artist="{{../artist}}">
             <!-- fill in choice array here -->
-            {{../artist}} &nbsp; - &nbsp; {{this}}
+            {{../artist}}<br>{{this}}
           </li>
           {{/each}}
         </ul>

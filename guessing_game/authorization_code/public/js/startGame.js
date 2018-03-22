@@ -224,8 +224,7 @@ const startGame = (event) => {
                 // ----------------------------------
                 if ($elem.data('song') === $parent.data('song')) {
                   $parent.css({
-                    background: 'green',
-                        filter: 'inherit'
+                    background: 'rgb(29, 185, 84)'
                   });
                     $parent.find('img').css({
                         filter: 'inherit'
