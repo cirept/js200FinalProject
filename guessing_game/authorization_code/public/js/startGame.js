@@ -225,10 +225,14 @@ const startGame = (event) => {
                 if ($elem.data('song') === $parent.data('song')) {
                   $parent.css({
                     background: 'green',
+                        filter: 'inherit'
                   });
+                    $child.css({
+                        filter: 'inherit'
+                    })
                 } else {
                   $parent.css({
-                    background: 'red',
+                    background: 'red'
                   });
                 }
               });
