@@ -1,7 +1,7 @@
 finalproject
 
 Eric Tanaka
-Jun Kim test
+Jun Kim test working
 
 # how to run game
 
