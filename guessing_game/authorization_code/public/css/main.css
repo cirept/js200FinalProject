@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');
-/* @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'); */
-
-/* ****************************************************** */
-
-/* general styles */
-
-/* ****************************************************** */
+/* GENERAL ELEMENT STYLES */
 
 body {
   font: 12px 'Roboto', sans-serif;
@@ -73,11 +67,7 @@ main {
   /* background: rgb(29, 185, 84); */
 }
 
-/* ****************************************************** */
-
-/* id selectors */
-
-/* ****************************************************** */
+/* ID SELECTORS */
 
 #login,
 #loggedin {
@@ -137,11 +127,7 @@ div[id*="song"] {
   text-align: center;
 }
 
-/* ****************************************************** */
-
-/* class selectors */
-
-/* ****************************************************** */
+/* CLASS SELECTORS */
 
 .hide {
   display: none;
@@ -197,11 +183,7 @@ div[id*="song"] {
   color: rgb(255, 255, 255);
 }
 
-/* ****************************************************** */
-
-/* element selectors, psuedo */
-
-/* ****************************************************** */
+/* ELEMENT | PSUEDO SELECTORS */
 
 div[class*="song"] {
   width: 300px;
