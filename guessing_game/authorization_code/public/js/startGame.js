@@ -66,6 +66,7 @@ const startGame = (event) => {
         const songs = generateSongList(trackCount, numberOfSongs);
         // loop counter for the songs
         let no = 1;
+        console.log(songs);
         // get the track numbers from the playlist
         // USED MAP BECAUSE I DID NOT WANT TO CREATE A LOOP.  =]
         const quizQuestions = songs.map((x) => {
@@ -237,10 +238,10 @@ const startGame = (event) => {
                 // ----------------------------------
                 // Bind OPTION click functionality
                 // ----------------------------------
-                const elem = ev.target;
-                const $elem = jQuery(ev.target);
+                let elem = ev.target;
+                let $elem = jQuery(ev.target);
                 // const data = event.target.dataset;
-                const $parent = jQuery(elem)
+                let $parent = jQuery(elem)
                   .parents('div[class*="song"]');
                 // ----------------------------------
                 // Bind the Options Elements
@@ -248,11 +249,17 @@ const startGame = (event) => {
                 if ($elem.data('song') === $parent.data('song')) {
                   // change whole card green
                   $parent.css({
-                    'background-color': 'rgba(255, 255, 255, .25)',
+                    'background-color': 'rgb(29, 185, 84)',
                     '-webkit - transition': 'background-color 1000ms linear',
                     '-ms-transition': 'background-color 1000ms linear',
                     'transition': 'background-color 1000ms linear',
                   });
+
+                  // remove blur from images
+                  $parent.find('img')
+                    .css({
+                      filter: 'inherit',
+                    });
 
                   // convert current score to a number
                   let curScore = Number(jQuery('#score')
