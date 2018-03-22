@@ -252,3 +252,12 @@ const startGame = (event) => {
     console.log('track count already known');
   }
 };
+
+//$(window).bind('scroll', function () {
+//    var menu = $('#scoreboard');
+//    if ($(window).scrollTop() > menu.offset().top) {
+//        menu.addClass('fixed');
+//    } else {
+//        menu.removeClass('fixed');
+//    }
+//});

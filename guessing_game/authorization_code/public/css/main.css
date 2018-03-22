@@ -179,6 +179,13 @@ div[id*="song"] {
   width: 100%;
   text-align: center;
   font-size: 30px;
+    transition: .5s;
+    display: inherit;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
 }
 
 #loading {
