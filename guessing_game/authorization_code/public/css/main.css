@@ -3,6 +3,8 @@
 
 body {
   font: 12px 'Roboto', sans-serif;
+  background: #333333;
+  color: #ffffff;
 }
 
 h1,
@@ -11,16 +13,13 @@ h3,
 h4,
 h5 {
   font-family: 'Raleway', sans-serif;
+  padding: 10px;
+  margin: 0;
 }
 
 h1 {
   font-size: 35px;
   line-height: 70px;
-}
-
-h2 {
-  position: relative;
-  top: 0px;
 }
 
 .btn,
@@ -30,9 +29,9 @@ input[type="reset"],
 input[type="button"] {
   background: #191414;
   cursor: pointer;
-  border-radius: 30px;
-  padding: 15px 30px;
-  margin: 10px;
+  border-radius: 50px;
+  padding: 10px 30px;
+  margin: 10px 0;
   text-decoration: none;
   color: rgb(255, 255, 255);
   font-size: 12px;
@@ -44,6 +43,10 @@ input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
   outline: 0;
+}
+
+.guessSong {
+  border-radius: 10px;
 }
 
 header {
@@ -72,6 +75,7 @@ main {
 #login,
 #loggedin {
   display: none;
+  width: 100%;
 }
 
 #login {
@@ -86,7 +90,7 @@ main {
 }
 
 #user-profile>.media {
-  display: inline-block;
+  /*  display: inline-block;*/
 }
 
 #gameSettings {
@@ -98,6 +102,21 @@ main {
 
 #gameSettings select {
   font-size: 16px;
+}
+
+/* #startGame {
+  display: block;
+} */
+
+.howManyQ {
+  font-size: 30px;
+  text-align: center;
+}
+
+.howManyA {
+  font-size: 30px;
+  padding: 10px;
+  margin: 40px;
 }
 
 div[id*="song"] {
@@ -117,14 +136,24 @@ div[id*="song"] {
   width: 90%;
   text-align: center;
   font-size: 30px;
-  background: #191414;
-  color: rgb(255, 255, 255);
+  transition: .5s;
+  display: inherit;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
 }
 
 #loading {
-  position: absolute;
-  top: 40%;
   text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  #loading {
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
 /* CLASS SELECTORS */
@@ -148,18 +177,31 @@ div[id*="song"] {
 }
 
 .pull-left {
-  width: auto;
   display: inline-block;
 }
 
 .media-body {
   display: inline-block;
-  text-align: left;
   margin: 0 0 0 40px;
+  line-height: 2;
+  vertical-align: top;
+}
+
+@media only screen and (max-width: 600px) {
+  .pull-left {
+    display: inherit;
+  }
+  .media-body {
+    display: inherit;
+  }
 }
 
 .btn.btn-primary {
   background: rgb(29, 185, 84);
+  width: 100%;
+  height: 100%;
+  font-size: 26px;
+  line-height: 2;
 }
 
 .choice_list {
@@ -205,8 +247,29 @@ li[class*="choice"] {
 li[class*="choice"]:hover {
   background: purple;
   cursor: pointer;
+  transition: .5s;
 }
 
 dt {
   font-weight: bold;
+  float: left;
+  /* display: inline-block; */
+}
+
+dd {
+  margin-left: 100px;
+  /* display: inline-block; */
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+/*********************/
+
+.albumart {
+  transition: 0.5s;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
 }
