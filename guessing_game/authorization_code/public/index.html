@@ -9,6 +9,7 @@
     <script src="/js/master.js" charset="utf-8"></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/flip.css">
+    <link rel="stylesheet" href="/css/animate.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" charset="utf-8"></script>
@@ -30,6 +31,7 @@
         <div id="user-profile">
         </div>
       </div>
+      <div id="scoreboard" class="hide">Questions Correct : <span id="score">0</span></div>
     </header>
     <main>
       <div id="loading" class="fa-5x hide">
@@ -37,12 +39,11 @@
         <i class="fas fa-cog fa-spin"></i>
       </div>
       <div id="gameSettings" class="hide">
-        <label for="questionAmount">How Many Questions Would You Like?</label>
-        <select name="questionAmount"></select>
+        <label for="questionAmount" class="howManyQ">How Many Questions Would You Like?</label>
+        <select name="questionAmount" class="howManyA"></select>
         <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
       </div>
-      <div id="gameInterface" class="hide">
-        <div id="scoreboard" class="hide">Questions Correct : <span id="score">0</span></div>
+      <div id="gameInterface">
       </div>
     </main>
   </body>

@@ -1,14 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');
-/* @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'); */
-
-/* ****************************************************** */
-
-/* general styles */
-
-/* ****************************************************** */
+/* GENERAL ELEMENT STYLES */
 
 body {
   font: 12px 'Roboto', sans-serif;
+  background: #333333;
+  color: #ffffff;
 }
 
 h1,
@@ -17,6 +13,8 @@ h3,
 h4,
 h5 {
   font-family: 'Raleway', sans-serif;
+  padding: 10px;
+  margin: 0;
 }
 
 h1 {
@@ -31,9 +29,9 @@ input[type="reset"],
 input[type="button"] {
   background: #191414;
   cursor: pointer;
-  border-radius: 30px;
-  padding: 15px 30px;
-  margin: 10px;
+  border-radius: 50px;
+  padding: 10px 30px;
+  margin: 10px 0;
   text-decoration: none;
   color: rgb(255, 255, 255);
   font-size: 12px;
@@ -45,6 +43,10 @@ input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
   outline: 0;
+}
+
+.guessSong {
+  border-radius: 10px;
 }
 
 header {
@@ -65,77 +67,57 @@ main {
   justify-content: center;
   align-items: center;
   align-content: center;
+  /* background: rgb(29, 185, 84); */
 }
 
-/* button:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-input[type="button"]:hover {
-  /* background: none; */
-
-/* cursor: pointer; */
-
-/* border-radius: 30px; */
-
-/* padding: 15px 30px; */
-
-/* margin: 10px; */
-
-/* text-decoration: none; */
-
-/* color: rgb(255, 255, 255); */
-
-/* font-size: 12px; */
-
-/* border: none; */
-
-/* } */
-
-/* ****************************************************** */
-
-/* id selectors */
-
-/* ****************************************************** */
+/* ID SELECTORS */
 
 #login,
 #loggedin {
   display: none;
+  width: 100%;
 }
 
 #login {
   margin: 20px 10px;
-  /* text-align: center; */
   position: absolute;
   top: 35%;
 }
 
-/* #loggedin {
-  text-align: center;
-} */
-
 #user-profile {
-  background: rgb(29, 185, 84);
+  /* background: rgb(29, 185, 84); */
   padding: 10px;
 }
 
 #user-profile>.media {
-  display: inline-block;
+  /*  display: inline-block;*/
 }
 
 #gameSettings {
-  /* display: none; */
   justify-content: center;
   flex-direction: column;
   padding: 20px;
+  font-size: 16px;
 }
 
-#gameSettings.flex {
-  display: flex;
+#gameSettings select {
+  font-size: 16px;
 }
 
 /* #startGame {
   display: block;
 } */
+
+.howManyQ {
+  font-size: 30px;
+  text-align: center;
+}
+
+.howManyA {
+  font-size: 30px;
+  padding: 10px;
+  margin: 40px;
+}
 
 div[id*="song"] {
   display: flex;
@@ -151,22 +133,30 @@ div[id*="song"] {
 }
 
 #scoreboard {
-  width: 100%;
+  width: 90%;
   text-align: center;
   font-size: 30px;
+  transition: .5s;
+  display: inherit;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
 }
 
 #loading {
-  position: absolute;
-  top: 40%;
   text-align: center;
 }
 
-/* ****************************************************** */
+@media only screen and (max-width: 600px) {
+  #loading {
+    font-size: 14px;
+    text-align: center;
+  }
+}
 
-/* class selectors */
-
-/* ****************************************************** */
+/* CLASS SELECTORS */
 
 .hide {
   display: none;
@@ -179,16 +169,6 @@ div[id*="song"] {
   width: 500px;
 }
 
-/* .song {
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid #000000;
-} */
-
-/* .songSample {
-  display: none;
-} */
-
 .notes {
   display: block;
   clear: right;
@@ -197,23 +177,31 @@ div[id*="song"] {
 }
 
 .pull-left {
-  width: auto;
   display: inline-block;
 }
 
 .media-body {
   display: inline-block;
-  text-align: left;
   margin: 0 0 0 40px;
+  line-height: 2;
+  vertical-align: top;
 }
 
-/* .btn {
-  background: #191414;
-  color: rgb(255, 255, 255);
-} */
+@media only screen and (max-width: 600px) {
+  .pull-left {
+    display: inherit;
+  }
+  .media-body {
+    display: inherit;
+  }
+}
 
 .btn.btn-primary {
   background: rgb(29, 185, 84);
+  width: 100%;
+  height: 100%;
+  font-size: 26px;
+  line-height: 2;
 }
 
 .choice_list {
@@ -222,22 +210,22 @@ div[id*="song"] {
   padding: 0;
 }
 
-/* .pinTop {
-  display: block;
-  /* align-self: flex-start; */
+.pinTop {
+  position: fixed;
+  top: 0;
+}
 
-/* position: absolute;
-top: 0;
-width: 100%;
-} */
+.relativePos {
+  top: "";
+  position: relative;
+}
 
-/* */
+.btn.btn-primary:hover {
+  background: #191414;
+  color: rgb(255, 255, 255);
+}
 
-/* ****************************************************** */
-
-/* element selectors, psuedo */
-
-/* ****************************************************** */
+/* ELEMENT | PSUEDO SELECTORS */
 
 div[class*="song"] {
   width: 300px;
@@ -248,28 +236,40 @@ div[class*="song"] {
   align-content: center;
   margin: 10px;
   padding: 10px;
-  border: 1px solid black;
-  /* margin: 10px 0; */
-  /* margin: 0 auto; */
+  border: 1px solid #191414;
 }
 
 li[class*="choice"] {
-  padding: 10px;
-  /* display: flex; */
-  /* justify-content: center; */
+  padding: 25px 10px;
   text-align: justify;
 }
 
 li[class*="choice"]:hover {
   background: purple;
   cursor: pointer;
+  transition: .5s;
 }
 
 dt {
   font-weight: bold;
+  float: left;
   /* display: inline-block; */
 }
 
 dd {
+  margin-left: 100px;
   /* display: inline-block; */
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+/*********************/
+
+.albumart {
+  transition: 0.5s;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
 }
