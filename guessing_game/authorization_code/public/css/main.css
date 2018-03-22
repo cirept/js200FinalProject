@@ -100,6 +100,7 @@ input[type="button"]:hover {
 #login,
 #loggedin {
   display: none;
+    width: 100%;
 }
 
 #login {
@@ -205,6 +206,8 @@ div[id*="song"] {
   display: inline-block;
   text-align: left;
   margin: 0 0 0 40px;
+    float: right;
+    line-height: 2;
 }
 
 /* .btn {
@@ -267,10 +270,12 @@ li[class*="choice"]:hover {
 
 dt {
   font-weight: bold;
+    float: left;
   /* display: inline-block; */
 }
 
 dd {
+    margin-left: 100px;
   /* display: inline-block; */
 }
 
