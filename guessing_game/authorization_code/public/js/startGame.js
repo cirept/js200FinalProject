@@ -224,6 +224,15 @@ const startGame = (event) => {
           // bind the functionality to the GUESS SONG button
           jQuery(`.song${x} button.guessSong`)
             .on('click', () => {
+              // ----------------------------------
+              // STOP ALL PLAYERS
+              // ----------------------------------
+              jQuery.each(jQuery('audio'), function (ind, elem) {
+                elem.pause();
+              });
+              // ----------------------------------
+              // Flip to the back of the card
+              // ----------------------------------
               jQuery(`.song${x} .flip-container`)
                 .addClass('hover');
             });
