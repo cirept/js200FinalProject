@@ -106,7 +106,6 @@ const startGame = (event) => {
                 album_name: track.album.name,
               };
 
-              // TODO get artists top tracks and use them as choices
               // using map to run this function on all items in the array
               const artistTopTrackURL = `https://api.spotify.com/v1/artists/${track.artists[0].id}/top-tracks?country=ES`;
               // ----------------------------------
@@ -239,7 +238,7 @@ const startGame = (event) => {
                 // Bind OPTION click functionality
                 // ----------------------------------
                 let elem = ev.target;
-                let $elem = jQuery(ev.target);
+                let $elem = jQuery(ev.currentTarget);
                 // const data = event.target.dataset;
                 let $parent = jQuery(elem)
                   .parents('div[class*="song"]');
@@ -291,17 +290,20 @@ const startGame = (event) => {
                             'height': 'toggle',
                           }, 1000);
                         // hide the h2 while the animations happen
-                        $parent.children('h2')
-                          .toggle();
+                        // $parent.children('.cardHead')
+                        //   .toggle();
                         // shrink the entire card
                         $parent.animate({
-                          'height': '40px',
-                        })
-                          .delay(350)
+                          'height': '255px',
+                        }, 500)
+                          // .delay(350)
                           .queue(function () {
                             // show the h2
-                            $parent.children('h2')
-                              .toggle();
+                            $parent.children('.cardHead')
+                              .animate({
+                                'top': '45px',
+                              }, 500);
+                            // .toggle();
                           });
                       });
                   });

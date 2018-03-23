@@ -166,7 +166,7 @@ const stickyScoreBoard = () => {
       let $el = $('#scoreboard');
       let isPositionFixed = $el.css('position') == 'fixed';
       if ($(this)
-        .scrollTop() > 300 && !isPositionFixed) {
+        .scrollTop() > 400 && !isPositionFixed) {
         $el.css({
           'position': 'fixed',
           'top': '0px',
@@ -176,7 +176,7 @@ const stickyScoreBoard = () => {
         });
       }
       if ($(this)
-        .scrollTop() < 300 && isPositionFixed) {
+        .scrollTop() < 400 && isPositionFixed) {
         $el.css({
           'position': 'static',
           'top': '0px',

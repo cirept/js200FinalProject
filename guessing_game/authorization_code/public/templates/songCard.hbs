@@ -1,6 +1,10 @@
 <div class="song{{song_number}}" data-song="{{name}}" data-artist="{{artist}}">
-  <h3>Song {{song_number}}</h3>
-        <div><img src="{{album_art_medium}}" alt="{{album_name}}" class="albumart"></div>
+  <div class="cardHead">
+    <h3>Song {{song_number}}</h3>
+    <div id="imageContainer">
+      <img src="{{album_art_medium}}" alt="{{album_name}}" class="albumart">
+    </div>
+  </div>
   <div class="flip-container">
     <div class="flipper">
       <div class="front">
@@ -16,10 +20,10 @@
         <ul class="choice_list">
           <!-- loop through choice array object attribute -->
           {{#each choices}}
-          <li class="choice1" data-song="{{this}}" data-artist="{{../artist}}">
-            <!-- fill in choice array here -->
-            {{../artist}}<br>{{this}}
-          </li>
+            <li class="choice1" data-song="{{this}}" data-artist="{{../artist}}">
+              <!-- fill in choice array here -->
+              <span class="artist">{{../artist}}</span><br>{{this}}
+            </li>
           {{/each}}
         </ul>
       </div>

@@ -22,6 +22,11 @@ h1 {
   line-height: 70px;
 }
 
+h3 {
+  text-align: center;
+  font-size: 20px;
+}
+
 .btn,
 button,
 input[type="submit"],
@@ -34,7 +39,7 @@ input[type="button"] {
   margin: 10px 0;
   text-decoration: none;
   color: rgb(255, 255, 255);
-  font-size: 12px;
+  /* font-size: 12px; */
   border: none;
 }
 
@@ -111,11 +116,8 @@ div[id*="song"] {
   text-align: center;
   font-size: 30px;
   transition: .5s;
-}
-
-.fixed {
-  position: fixed;
-  top: 0;
+  padding: 20px 0 0 0;
+  background: rgb(51, 51, 51);
 }
 
 #loading {
@@ -129,7 +131,26 @@ div[id*="song"] {
   }
 }
 
+#imageContainer {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
 /* CLASS SELECTORS */
+
+.cardHead {
+  position: relative;
+  top: 0;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+}
 
 .albumart {
   transition: 0.5s;
@@ -196,6 +217,10 @@ div[id*="song"] {
   transition: 0.25s ease;
 }
 
+.btn.reverse {
+  background: #191414;
+}
+
 .choice_list {
   list-style-type: none;
   margin: 0;
@@ -210,6 +235,10 @@ div[id*="song"] {
 .relativePos {
   top: "";
   position: relative;
+}
+
+.artist {
+  font-size: 16px;
 }
 
 /* ELEMENT | PSUEDO SELECTORS */
@@ -227,10 +256,16 @@ div[class*="song"] {
   transition: 0.5s;
 }
 
+div[class*="song"]:hover {
+  -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, .5);
+  -moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, .5);
+  box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, .5);
+}
+
 li[class*="choice"] {
-  padding: 25px 10px;
+  padding: 10px;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 li[class*="choice"]:hover {
