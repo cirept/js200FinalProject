@@ -14,20 +14,20 @@ Starts the functionality of the game
  */
 const startGame = (event) => {
   // show the game UI
-  jQuery('#gameInterface')
+  $('#gameInterface')
     .show();
   // hide the buttons
-  jQuery('#gameSettings')
+  $('#gameSettings')
     .hide();
   // show game loading screen
-  jQuery('#loading')
+  $('#loading')
     .removeClass('hide');
 
   // the URL for the game playlist
   const totalURL = 'https://api.spotify.com/v1/users/cirept612/playlists/5J9c1FAlO3qEnLMLSqZjwu/tracks?market=ES&fields=total&limit=1&offset=1';
   let trackCount;
   // set the number of songs that make up the game questions
-  const numberOfSongs = Number(jQuery('#gameSettings select[name="questionAmount"]')
+  const numberOfSongs = Number($('#gameSettings select[name="questionAmount"]')
     .val());
   const songList = {}; // empty object to store song information
 
@@ -35,7 +35,7 @@ const startGame = (event) => {
     // ----------------------------------
     // get the total number of tracks in the custom playlist
     // ----------------------------------
-    jQuery.ajax({
+    $.ajax({
       url: totalURL,
       async: true,
       contentType: 'application/json',
@@ -48,11 +48,11 @@ const startGame = (event) => {
         // ----------------------------------
         // show error message and have the user re-log
         // ----------------------------------
-        jQuery('body .container')
+        $('body .container')
           .prepend('<span>Connection Timed Out : Please log back into Spotify</span>');
-        jQuery('#loggedin')
+        $('#loggedin')
           .hide();
-        jQuery('#login')
+        $('#login')
           .show();
       })
       .done((data) => {
@@ -72,7 +72,7 @@ const startGame = (event) => {
         const quizQuestions = songs.map((x) => {
           // using map to run this function on all items in the array
           const trackURL = `https://api.spotify.com/v1/users/cirept612/playlists/5J9c1FAlO3qEnLMLSqZjwu/tracks?market=ES&limit=1&offset=${x}`;
-          jQuery.ajax({
+          $.ajax({
             url: trackURL,
             async: false,
             contentType: 'application/json',
@@ -111,7 +111,7 @@ const startGame = (event) => {
               // ----------------------------------
               // Get Artist Top Tracks From spotify
               // ----------------------------------
-              jQuery.ajax({
+              $.ajax({
                 url: artistTopTrackURL,
                 async: false,
                 contentType: 'application/json',
@@ -169,11 +169,11 @@ const startGame = (event) => {
         // ----------------------------------
         // loop through each song stored in the object and create cards for them
         // ----------------------------------
-        jQuery.each(songList, (prop, value) => {
+        $.each(songList, (prop, value) => {
           // ----------------------------------
           // Build Song Cards
           // ----------------------------------
-          jQuery.ajax({
+          $.ajax({
             url: 'templates/songCard.hbs',
             async: false,
             success: (data) => {
@@ -192,15 +192,15 @@ const startGame = (event) => {
               // ----------------------------------
               // animate the song cards reveal
               // ----------------------------------
-              jQuery('#gameInterface')
+              $('#gameInterface')
                 .hide()
                 .show()
                 .fadeIn(1000)
                 .delay(0)
                 .queue(function () {
-                  jQuery('div[class*="song"]')
+                  $('div[class*="song"]')
                     .each(function (index, elem) {
-                      jQuery(elem)
+                      $(elem)
                         // .hide()
                         .delay(200 * index)
                         .animate({
@@ -223,18 +223,18 @@ const startGame = (event) => {
           // FRONT of Card
           // ----------------------------------
           // bind the functionality to the GUESS SONG button
-          jQuery(`.song${x} button.guessSong`)
+          $(`.song${x} button.guessSong`)
             .on('click', () => {
               // ----------------------------------
               // STOP ALL PLAYERS
               // ----------------------------------
-              jQuery.each(jQuery('audio'), function (ind, elem) {
+              $.each($('audio'), function (ind, elem) {
                 elem.pause();
               });
               // ----------------------------------
               // Flip to the back of the card
               // ----------------------------------
-              jQuery(`.song${x} .flip-container`)
+              $(`.song${x} .flip-container`)
                 .addClass('hover');
             });
           // ----------------------------------
@@ -242,15 +242,15 @@ const startGame = (event) => {
           // ----------------------------------
           // bind song choices
           for (let y = 1; y < 5; y += 1) {
-            jQuery(`.song${x} .choice${y}`)
+            $(`.song${x} .choice${y}`)
               .on('click', (ev) => {
                 // ----------------------------------
                 // Bind OPTION click functionality
                 // ----------------------------------
                 let elem = ev.target;
-                let $elem = jQuery(ev.currentTarget);
+                let $elem = $(ev.currentTarget);
                 // const data = event.target.dataset;
-                let $parent = jQuery(elem)
+                let $parent = $(elem)
                   .parents('div[class*="song"]');
                 // ----------------------------------
                 // Bind the Options Elements
@@ -271,10 +271,10 @@ const startGame = (event) => {
                     });
 
                   // convert current score to a number
-                  let curScore = Number(jQuery('#score')
+                  let curScore = Number($('#score')
                     .html());
                   // add the current score plus 1
-                  jQuery('#score')
+                  $('#score')
                     .html(curScore + 1);
                 } else {
                   $parent.css({
@@ -323,12 +323,12 @@ const startGame = (event) => {
         // ----------------------------------
         // Show the ScoreBoard
         // ----------------------------------
-        jQuery('#scoreboard')
+        $('#scoreboard')
           .fadeIn(1000);
         // ----------------------------------
         // hide loading screen
         // ----------------------------------
-        jQuery('#loading')
+        $('#loading')
           .addClass('hide');
       });
   } else {

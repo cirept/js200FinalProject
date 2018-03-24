@@ -1,5 +1,5 @@
 /**
- * Extends jquery functionality for easy implementation
+ * Extends $ functionality for easy implementation
  * of animate css classes
  */
 $.fn.extend({
@@ -101,15 +101,15 @@ const getUserProfile = (accessToken) => {
     .fail(function (xhr, textStatus, e) {
       // this will run if the token has expired after the user tries to reload the game
       if (xhr.status == 401 && e === 'Unauthorized') {
-        jQuery('body .container')
+        $('body .container')
           .prepend('<span>Connection Timed Out : Please log back into Spotify</span>');
-        jQuery('#login')
+        $('#login')
           .show();
       }
     })
     .done((response, textStatus, xhr) => {
       // dynamically call the template file to load the html onto the page
-      jQuery.ajax({
+      $.ajax({
         url: 'templates/user-profile-template.hbs',
       })
         .done((data, textStatus, xhr) => {
@@ -119,7 +119,7 @@ const getUserProfile = (accessToken) => {
           userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
           // background color transition
-          jQuery('body')
+          $('body')
             .css({
               'background-color': 'rgb(51, 51, 51)',
               '-webkit - transition': 'background-color 1000ms linear',
@@ -129,17 +129,17 @@ const getUserProfile = (accessToken) => {
           // ----------------------------------
           // toggle visibility to page sections
           // ----------------------------------
-          jQuery('#login')
+          $('#login')
             .hide();
-          jQuery('#gameInterface')
+          $('#gameInterface')
             .hide();
-          jQuery('#loggedin')
+          $('#loggedin')
             .fadeIn(1000);
 
           // ----------------------------------
           // show loading screen
           // ----------------------------------
-          jQuery('#gameSettings')
+          $('#gameSettings')
             .removeClass('hide')
             .css('display', 'flex')
             .hide()
@@ -148,7 +148,7 @@ const getUserProfile = (accessToken) => {
           // ----------------------------------
           // build the options for the questions amount drop down
           // ----------------------------------
-          let $myDrop = jQuery('#gameSettings > select');
+          let $myDrop = $('#gameSettings > select');
           for (let z = 5; z <= 20; z += 1) {
             $myDrop.html($myDrop.html() + '<option value="' + z + '">' + z + '</option>');
           }
@@ -190,11 +190,11 @@ const stickyScoreBoard = () => {
  * Triggers the loading animation when the user chooses to log into Spotify
  */
 const bindLoginEvent = () => {
-  jQuery('#loginLink')
+  $('#loginLink')
     .on('click', function () {
-      jQuery('#login .loginScreen')
+      $('#login .loginScreen')
         .hide();
-      jQuery('#login .loading')
+      $('#login .loading')
         .removeClass('hide');
     });
 };
@@ -220,16 +220,16 @@ const loadGame = () => {
       getUserProfile(accessToken);
     } else {
       // render initial screen
-      jQuery('#login')
+      $('#login')
         .show();
-      jQuery('#gameInterface')
+      $('#gameInterface')
         .hide();
-      jQuery('#loggedin')
+      $('#loggedin')
         .hide();
     }
 
     // BIND EVENT LISTER TO START GAME BUTTON
-    jQuery('#startGame')
+    $('#startGame')
       .on('click', {
         access_token: accessToken,
       }, startGame);
@@ -246,5 +246,5 @@ const startApp = () => {
 };
 
 // load the function call everytime the page loads
-jQuery(document)
+$(document)
   .ready(startApp);
