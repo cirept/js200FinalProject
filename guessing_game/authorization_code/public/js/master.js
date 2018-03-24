@@ -118,9 +118,10 @@ const getUserProfile = (accessToken) => {
           let userProfilePlaceholder = document.getElementById('user-profile');
           userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
+          // background color transition
           jQuery('body')
             .css({
-              'background-color': 'rgb(29, 185, 84)',
+              'background-color': 'rgb(51, 51, 51)',
               '-webkit - transition': 'background-color 1000ms linear',
               '-ms-transition': 'background-color 1000ms linear',
               'transition': 'background-color 1000ms linear',
