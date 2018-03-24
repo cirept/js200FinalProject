@@ -254,6 +254,7 @@ div[class*="song"] {
   padding: 10px 10px 110px 10px;
   background: rgb(85, 85, 85);
   transition: 0.5s;
+  opacity: 0;
 }
 
 div[class*="song"]:hover {

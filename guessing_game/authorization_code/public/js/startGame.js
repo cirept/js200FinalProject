@@ -196,11 +196,12 @@ const startGame = (event) => {
                 .hide()
                 .show()
                 .fadeIn(1000)
-                .delay(1500)
+                .delay(0)
                 .queue(function () {
                   jQuery('div[class*="song"]')
                     .each(function (index, elem) {
                       jQuery(elem)
+                        // .hide()
                         .delay(200 * index)
                         .animate({
                           'opacity': 1,
