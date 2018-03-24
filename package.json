@@ -1,0 +1,18 @@
+{
+	"name": "Guess-The-Song-App",
+	"version": "0.0.2",
+	"private": true,
+	"dependencies": {
+		"aws-sdk": "latest",
+		"body-parser": "latest",
+		"cookie-parser": "latest",
+		"ejs": "latest",
+		"express": "latest",
+		"querystring": "latest",
+		"request": "latest",
+		"handlebars": "latest"
+	},
+	"scripts": {
+		"start": "node app.js"
+	}
+}
