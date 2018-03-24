@@ -66,6 +66,7 @@ const startGame = (event) => {
         const songs = generateSongList(trackCount, numberOfSongs);
         // loop counter for the songs
         let no = 1;
+        console.log(songs);
         // get the track numbers from the playlist
         // USED MAP BECAUSE I DID NOT WANT TO CREATE A LOOP.  =]
         const quizQuestions = songs.map((x) => {
@@ -105,7 +106,6 @@ const startGame = (event) => {
                 album_name: track.album.name,
               };
 
-              // TODO get artists top tracks and use them as choices
               // using map to run this function on all items in the array
               const artistTopTrackURL = `https://api.spotify.com/v1/artists/${track.artists[0].id}/top-tracks?country=ES`;
               // ----------------------------------
@@ -196,11 +196,12 @@ const startGame = (event) => {
                 .hide()
                 .show()
                 .fadeIn(1000)
-                .delay(1500)
+                .delay(0)
                 .queue(function () {
                   jQuery('div[class*="song"]')
                     .each(function (index, elem) {
                       jQuery(elem)
+                        // .hide()
                         .delay(200 * index)
                         .animate({
                           'opacity': 1,
@@ -224,6 +225,15 @@ const startGame = (event) => {
           // bind the functionality to the GUESS SONG button
           jQuery(`.song${x} button.guessSong`)
             .on('click', () => {
+              // ----------------------------------
+              // STOP ALL PLAYERS
+              // ----------------------------------
+              jQuery.each(jQuery('audio'), function (ind, elem) {
+                elem.pause();
+              });
+              // ----------------------------------
+              // Flip to the back of the card
+              // ----------------------------------
               jQuery(`.song${x} .flip-container`)
                 .addClass('hover');
             });
@@ -237,10 +247,10 @@ const startGame = (event) => {
                 // ----------------------------------
                 // Bind OPTION click functionality
                 // ----------------------------------
-                const elem = ev.target;
-                const $elem = jQuery(ev.target);
+                let elem = ev.target;
+                let $elem = jQuery(ev.currentTarget);
                 // const data = event.target.dataset;
-                const $parent = jQuery(elem)
+                let $parent = jQuery(elem)
                   .parents('div[class*="song"]');
                 // ----------------------------------
                 // Bind the Options Elements
@@ -248,11 +258,17 @@ const startGame = (event) => {
                 if ($elem.data('song') === $parent.data('song')) {
                   // change whole card green
                   $parent.css({
-                    'background-color': 'rgba(255, 255, 255, .25)',
+                    'background-color': 'rgb(29, 185, 84)',
                     '-webkit - transition': 'background-color 1000ms linear',
                     '-ms-transition': 'background-color 1000ms linear',
                     'transition': 'background-color 1000ms linear',
                   });
+
+                  // remove blur from images
+                  $parent.find('img')
+                    .css({
+                      filter: 'inherit',
+                    });
 
                   // convert current score to a number
                   let curScore = Number(jQuery('#score')
@@ -284,17 +300,20 @@ const startGame = (event) => {
                             'height': 'toggle',
                           }, 1000);
                         // hide the h2 while the animations happen
-                        $parent.children('h2')
-                          .toggle();
+                        // $parent.children('.cardHead')
+                        //   .toggle();
                         // shrink the entire card
                         $parent.animate({
-                          'height': '40px',
-                        })
-                          .delay(350)
+                          'height': '255px',
+                        }, 500)
+                          // .delay(350)
                           .queue(function () {
                             // show the h2
-                            $parent.children('h2')
-                              .toggle();
+                            $parent.children('.cardHead')
+                              .animate({
+                                'top': '45px',
+                              }, 500);
+                            // .toggle();
                           });
                       });
                   });
