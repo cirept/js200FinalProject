@@ -237,28 +237,39 @@ const startGame = (event) => {
               $(`.song${x} .flip-container`)
                 .addClass('hover');
             });
-          $(`.song${x} button.guessSong`)
+          // ----------------------------------
+          // Mouseover auto-playback
+          // ----------------------------------
+          $(`.song${x} .flipper`)
             .on('mouseover', () => {
-              // ----------------------------------
-              // STOP ALL PLAYERS
-              // ----------------------------------
               $.each($(`.song${x} .songSample`), function (ind, elem) {
                 elem.play();
               });
             });
           $(`.song${x}`)
             .on('mouseleave', () => {
-              // ----------------------------------
-              // STOP ALL PLAYERS
-              // ----------------------------------
               $.each($(`.song${x} .songSample`), function (ind, elem) {
                 elem.pause();
               });
             });
-
-            $(`.song${x} .songSample`).on('timeupdate', function() {
-                $(`.song${x} #seekbar`).attr("value", this.currentTime / this.duration);
+          // ----------------------------------
+          // Mobile Play Button
+          // ----------------------------------
+          $(`.song${x} #mobileButton`)
+            .on('click', () => {
+              $.each($('audio'), function (ind, elem) {
+                elem.pause();
+              });
+              $.each($(`.song${x} .songSample`), function (ind, elem) {
+                elem.play();
+              });
             });
+          // ----------------------------------
+          // Progress Bar
+          // ----------------------------------
+          $(`.song${x} .songSample`).on('timeupdate', function () {
+            $(`.song${x} #seekbar`).attr("value", this.currentTime / this.duration);
+          });
           // ----------------------------------
           // BACK of Card
           // ----------------------------------
@@ -266,6 +277,12 @@ const startGame = (event) => {
           for (let y = 1; y < 5; y += 1) {
             $(`.song${x} .choice${y}`)
               .on('click', (ev) => {
+                // ----------------------------------
+                // STOP ALL MUSIC
+                // ----------------------------------
+                $.each($('audio'), function (ind, elem) {
+                 elem.pause();
+                });
                 // ----------------------------------
                 // Bind OPTION click functionality
                 // ----------------------------------
