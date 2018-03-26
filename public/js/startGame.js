@@ -243,13 +243,20 @@ const startGame = (event) => {
           $(`.song${x} .flipper`)
             .on('mouseover', () => {
               $.each($(`.song${x} .songSample`), function (ind, elem) {
+                  $.each($('audio'), function (ind, elem) {
+                    elem.pause();
+                  });
                 elem.play();
+                  $(`.song${x} .guessSong`).contents().last()[0].textContent='CLICK TO GUESS';
+                  $(`.song${x} #guessButtonIcon`).attr("class", "fas fa-question");
               });
             });
-          $(`.song${x}`)
+          $(`.song${x} .flipper`)
             .on('mouseleave', () => {
               $.each($(`.song${x} .songSample`), function (ind, elem) {
                 elem.pause();
+                  $(`.song${x} .guessSong`).contents().last()[0].textContent='HOVER TO PLAY';
+                  $(`.song${x} #guessButtonIcon`).attr("class", "fas fa-play");
               });
             });
           // ----------------------------------
