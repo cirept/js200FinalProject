@@ -294,3 +294,11 @@ dd {
   font-family: Raleway;
   color: rgb(51, 51, 51);
 }
+
+.songSample {
+    display: none;
+}
+
+#seekbar {
+    margin-top: 15px;
+}

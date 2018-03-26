@@ -4,11 +4,13 @@
     <div id="imageContainer">
       <img src="{{album_art_medium}}" alt="{{album_name}}" class="albumart">
     </div>
+      
+          <progress id="seekbar" value="0" max="1" style="width: 100%;"></progress>
   </div>
   <div class="flip-container">
     <div class="flipper">
       <div class="front">
-        <audio class="songSample" controls>
+        <audio class="songSample" controls preload="auto">
           <source src="{{preview_url}}" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>

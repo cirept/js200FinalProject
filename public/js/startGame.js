@@ -228,14 +228,36 @@ const startGame = (event) => {
               // ----------------------------------
               // STOP ALL PLAYERS
               // ----------------------------------
-              $.each($('audio'), function (ind, elem) {
-                elem.pause();
-              });
+//              $.each($('audio'), function (ind, elem) {
+//                elem.pause();
+//              });
               // ----------------------------------
               // Flip to the back of the card
               // ----------------------------------
               $(`.song${x} .flip-container`)
                 .addClass('hover');
+            });
+          $(`.song${x} button.guessSong`)
+            .on('mouseover', () => {
+              // ----------------------------------
+              // STOP ALL PLAYERS
+              // ----------------------------------
+              $.each($(`.song${x} .songSample`), function (ind, elem) {
+                elem.play();
+              });
+            });
+          $(`.song${x}`)
+            .on('mouseleave', () => {
+              // ----------------------------------
+              // STOP ALL PLAYERS
+              // ----------------------------------
+              $.each($(`.song${x} .songSample`), function (ind, elem) {
+                elem.pause();
+              });
+            });
+
+            $(`.song${x} .songSample`).on('timeupdate', function() {
+                $(`.song${x} #seekbar`).attr("value", this.currentTime / this.duration);
             });
           // ----------------------------------
           // BACK of Card
