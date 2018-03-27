@@ -228,9 +228,9 @@ const startGame = (event) => {
               // ----------------------------------
               // STOP ALL PLAYERS
               // ----------------------------------
-              $.each($('audio'), function (ind, elem) {
-                elem.pause();
-              });
+//              $.each($('audio'), function (ind, elem) {
+//                elem.pause();
+//              });
               // ----------------------------------
               // Flip to the back of the card
               // ----------------------------------
@@ -238,12 +238,58 @@ const startGame = (event) => {
                 .addClass('hover');
             });
           // ----------------------------------
+          // Mouseover auto-playback
+          // ----------------------------------
+          $(`.song${x} .flipper`)
+            .on('mouseover', () => {
+              $.each($(`.song${x} .songSample`), function (ind, elem) {
+                  $.each($('audio'), function (ind, elem) {
+                    elem.pause();
+                  });
+                elem.play();
+                  $(`.song${x} .guessSong`).contents().last()[0].textContent='CLICK TO GUESS';
+                  $(`.song${x} #guessButtonIcon`).attr("class", "fas fa-question");
+              });
+            });
+          $(`.song${x} .flipper`)
+            .on('mouseleave', () => {
+              $.each($(`.song${x} .songSample`), function (ind, elem) {
+                elem.pause();
+                  $(`.song${x} .guessSong`).contents().last()[0].textContent='HOVER TO PLAY';
+                  $(`.song${x} #guessButtonIcon`).attr("class", "fas fa-play");
+              });
+            });
+          // ----------------------------------
+          // Mobile Play Button
+          // ----------------------------------
+          $(`.song${x} #mobileButton`)
+            .on('click', () => {
+              $.each($('audio'), function (ind, elem) {
+                elem.pause();
+              });
+              $.each($(`.song${x} .songSample`), function (ind, elem) {
+                elem.play();
+              });
+            });
+          // ----------------------------------
+          // Progress Bar
+          // ----------------------------------
+          $(`.song${x} .songSample`).on('timeupdate', function () {
+            $(`.song${x} #seekbar`).attr("value", this.currentTime / this.duration);
+          });
+          // ----------------------------------
           // BACK of Card
           // ----------------------------------
           // bind song choices
           for (let y = 1; y < 5; y += 1) {
             $(`.song${x} .choice${y}`)
               .on('click', (ev) => {
+                // ----------------------------------
+                // STOP ALL MUSIC
+                // ----------------------------------
+                $.each($('audio'), function (ind, elem) {
+                 elem.pause();
+                });
                 // ----------------------------------
                 // Bind OPTION click functionality
                 // ----------------------------------
